@@ -1,0 +1,51 @@
+{
+    "name": "PlayInput",
+    "maps": [
+        {
+            "name": "MouseClick",
+            "id": "70a1b1a4-8bbd-46cd-bbaf-88cc39f26ad7",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "2c5a55e6-086c-4a03-bac2-068cd65d9fe1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "73d3d98c-43b9-4fbd-bbcd-324594e40b2a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "KeyBoard & Mouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "KeyBoard & Mouse",
+            "bindingGroup": "KeyBoard & Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
