@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text HpText;
     [SerializeField] TMP_Text GoldText;
     [SerializeField] Slider HpBar;
-    public int Gold;
+    [SerializeField] TMP_Text AutoClickBtnText;
+    [SerializeField] TMP_Text AttackUpBtnText;
+    [SerializeField] TMP_Text AttackStatText;
     private void Awake()
     {
         if(Instance == null)
@@ -21,20 +23,36 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-        Gold = 0;
-    }
+        GameManager.Instance.Gold = 0;
 
-    public void UpdateHPUI()
-    {       
-        HpBar.value = EnemyManager.Instance.HPBarValue;
-        HpText.text = $"HP : {EnemyManager.Instance.HP}/{EnemyManager.Instance.MaxHP}";      
+        UpdateUI();
     }
-
-    public void UpdateGoldUI()
+    public void UpdateUI()
     {
-
-        GoldText.text = $"{Gold} G";
+        UpdateHPUI();
+        UpdateGoldUI();
+        UpdateBtn();
+        UpdateStatUI();
     }
 
-    
+    void UpdateHPUI()
+    {       
+        HpBar.value = (float)GameManager.Instance.EnemyHp / GameManager.Instance.EnemyMaxHp;
+        HpText.text = $"HP : {GameManager.Instance.EnemyHp}/{GameManager.Instance.EnemyMaxHp}";      
+    }
+
+    void UpdateGoldUI()
+    {
+        GoldText.text = $"{GameManager.Instance.Gold} G";
+    }    
+
+    void UpdateBtn()
+    {
+        AttackUpBtnText.text = $"Attack Cost:{ClickManager.Instance.AttackUpCost}";
+    }
+
+    void UpdateStatUI()
+    {
+        AttackStatText.text = $"Attack Damage : {PlayerManager.Instance.Player1.AttackDamage}";
+    }
 }

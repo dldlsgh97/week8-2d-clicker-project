@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public int MaxHP;
-    public int HP;
     public float HPBarValue;
     public static EnemyManager Instance;
     public GameObject[] Gems;
+    Animator _enemy_Anim;
     private void Awake()
     {
         if(Instance == null)
@@ -19,25 +18,35 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        MaxHP = 10000;
-        HP = MaxHP;
+        GameManager.Instance.EnemyMaxHp = 10000;
+        GameManager.Instance.EnemyHp = GameManager.Instance.EnemyMaxHp;
+        _enemy_Anim = GetComponent<Animator>();
     }
     void Update()
     {
-        
+        if(GameManager.Instance.EnemyHp <= 0)
+        {
+            GameManager.Instance.EnemyHp = 0;
+            StopDamage();
+            _enemy_Anim.SetTrigger("isDie");
+        }
     }
 
     public void GetDamage(int damage)
     {
-        HP -= damage;
-        HPBarValue = (float)HP / MaxHP;
+        GameManager.Instance.EnemyHp -= damage;
         DropGem();
-        UIManager.Instance.UpdateHPUI();
+        UIManager.Instance.UpdateUI();
+        _enemy_Anim.SetBool("GetDamage", true);
+    }
+    public void StopDamage()
+    {
+       _enemy_Anim.SetBool("GetDamage", false);
     }
 
     void DropGem()
     {
-        if(HP % 100 == 0)
+        if(GameManager.Instance.EnemyHp % 100 == 0)
         {
             float randNum = Random.value;
             if (randNum <= 0.7f)

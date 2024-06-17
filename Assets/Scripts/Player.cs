@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator _playerAnim;
-    [SerializeField] int AttackDamage = 10;
+    public int AttackDamage = 10;
     private void Start()
     {
         _playerAnim = GetComponent<Animator>();

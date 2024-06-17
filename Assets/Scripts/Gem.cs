@@ -20,8 +20,8 @@ public class Gem : MonoBehaviour
 
     void GetGem()
     {
-        UIManager.Instance.Gold += (int)type;
-        UIManager.Instance.UpdateGoldUI();
+        GameManager.Instance.Gold += (int)type;
+        UIManager.Instance.UpdateUI();
         Destroy(gameObject, 1f);
     }
 

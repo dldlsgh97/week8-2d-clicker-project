@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public ClickManager ClickManager;
-    public UIManager UIManager;
-    public EnemyManager EnemyManager;
+    public int EnemyMaxHp;
+    public int EnemyHp;
+    public int Gold;
 
     public static GameManager Instance;
     private void Awake()
@@ -16,6 +16,4 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-
-
 }
