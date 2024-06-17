@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    [SerializeField] TMP_Text HpText;
+    [SerializeField] TMP_Text GoldText;
+    [SerializeField] Slider HpBar;
+    public int Gold;
     private void Awake()
     {
         if(Instance == null)
@@ -14,12 +19,22 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
-    [SerializeField] Text ScoreText;
-    int _score;
-    public void AddScore(int score)
+    private void Start()
     {
-        _score += score;
-        ScoreText.text = $"Score : {_score}";
+        Gold = 0;
     }
+
+    public void UpdateHPUI()
+    {       
+        HpBar.value = EnemyManager.Instance.HPBarValue;
+        HpText.text = $"HP : {EnemyManager.Instance.HP}/{EnemyManager.Instance.MaxHP}";      
+    }
+
+    public void UpdateGoldUI()
+    {
+
+        GoldText.text = $"{Gold} G";
+    }
+
+    
 }

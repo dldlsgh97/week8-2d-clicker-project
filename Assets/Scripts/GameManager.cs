@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
-{  
-    void Start()
-    {
-    }
-    void Update()
-    {
+{
+    public ClickManager ClickManager;
+    public UIManager UIManager;
+    public EnemyManager EnemyManager;
 
+    public static GameManager Instance;
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
     }
 
 
