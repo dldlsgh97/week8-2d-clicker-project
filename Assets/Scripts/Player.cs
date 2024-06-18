@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     {
         _playerAnim.SetBool("Attack",true);
         EnemyManager.Instance.GetDamage(AttackDamage);
-        
+        AudioManager.Instance.SlashSound();
     }
 
     public void StopAttack()

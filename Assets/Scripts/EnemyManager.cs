@@ -18,9 +18,10 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.EnemyMaxHp = 10000;
+        GameManager.Instance.EnemyMaxHp = 1000000000;
         GameManager.Instance.EnemyHp = GameManager.Instance.EnemyMaxHp;
         _enemy_Anim = GetComponent<Animator>();
+        UIManager.Instance.UpdateUI();
     }
     void Update()
     {
@@ -38,6 +39,7 @@ public class EnemyManager : MonoBehaviour
         DropGem();
         UIManager.Instance.UpdateUI();
         _enemy_Anim.SetBool("GetDamage", true);
+        AudioManager.Instance.HitSound();
     }
     public void StopDamage()
     {

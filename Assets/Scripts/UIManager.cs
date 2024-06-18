@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text AutoClickBtnText;
     [SerializeField] TMP_Text AttackUpBtnText;
     [SerializeField] TMP_Text AttackStatText;
+    [SerializeField] Button LoadBtn;
     private void Awake()
     {
         if(Instance == null)
@@ -24,8 +25,6 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Gold = 0;
-
-        UpdateUI();
     }
     public void UpdateUI()
     {
@@ -33,6 +32,9 @@ public class UIManager : MonoBehaviour
         UpdateGoldUI();
         UpdateBtn();
         UpdateStatUI();
+        CheckLoadData();
+
+
     }
 
     void UpdateHPUI()
@@ -48,11 +50,39 @@ public class UIManager : MonoBehaviour
 
     void UpdateBtn()
     {
+        ClickManager.Instance.UpdateUpgradeCost();
         AttackUpBtnText.text = $"Attack Cost:{ClickManager.Instance.AttackUpCost}";
     }
 
     void UpdateStatUI()
     {
         AttackStatText.text = $"Attack Damage : {PlayerManager.Instance.Player1.AttackDamage}";
+    }
+
+    public void OnSaveBtnClick()
+    {
+        DataManager.Instance.SaveData();
+        LoadBtn.interactable = true;
+    }
+    void CheckLoadData()
+    {
+        if (PlayerPrefs.HasKey("EnemyHP") || PlayerPrefs.HasKey("PlayerAttackLevel") || PlayerPrefs.HasKey("Gold"))
+        {
+            LoadBtn.interactable = true;
+        }
+        else
+        {
+            LoadBtn.interactable = false;
+        }
+    }
+    public void OnLoadBtnClick()
+    {
+        DataManager.Instance.LoadData();
+        UpdateUI();
+    }
+    public void OnDeleteBtnClick()
+    {
+        DataManager.Instance.DeleteData();
+        CheckLoadData();
     }
 }

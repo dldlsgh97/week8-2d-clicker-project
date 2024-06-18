@@ -22,6 +22,7 @@ public class Gem : MonoBehaviour
     {
         GameManager.Instance.Gold += (int)type;
         UIManager.Instance.UpdateUI();
+        AudioManager.Instance.CoinSound();
         Destroy(gameObject, 1f);
     }
 

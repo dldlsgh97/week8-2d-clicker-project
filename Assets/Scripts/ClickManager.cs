@@ -13,7 +13,7 @@ public class ClickManager : MonoBehaviour
     [SerializeField] int AutoClickNum;
     private float _clickTimeCount = 0.0f;
     private float _curTimer = 0.0f;
-    [SerializeField] int AttackLevel = 1;
+    public int AttackLevel = 1;
     public int AttackUpCost = 10;
     public int AutoClickCost = 10;
     [SerializeField] int Attack_Up = 10;
@@ -39,6 +39,7 @@ public class ClickManager : MonoBehaviour
     }
     private void Update()
     {
+        AttackUpCost = AttackLevel * Attack_Up;
         _clickTimeCount += Time.deltaTime;
 
         if (_clickTimeCount - _curTimer > 0.5f)
@@ -88,12 +89,16 @@ public class ClickManager : MonoBehaviour
     {
         if(GameManager.Instance.Gold > AttackUpCost)
         {
+            AudioManager.Instance.UpgradeSound();
             GameManager.Instance.Gold -= AttackUpCost;
-            AttackLevel++;
-            AttackUpCost = AttackLevel * Attack_Up;
+            AttackLevel++;            
             PlayerManager.Instance.PlayerAttackUp(AttackLevel * Attack_Up);
             UIManager.Instance.UpdateUI();
         }
     }
-    
+    public void UpdateUpgradeCost()
+    {
+        AttackUpCost = AttackLevel * Attack_Up;
+    }
+
 }
